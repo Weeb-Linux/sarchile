@@ -7,11 +7,11 @@ echo "======"
 echo "Installing necessary packages from Termux..."
 echo ""
 
-pkg install proot tar aria2 -y
+pkg install wget proot tar aria2 -y
 
 echo "Installing sarchile manager tool..."
 
-curl https://git.io/JKJrk --output /data/data/com.termux/files/usr/bin/smgr 
+wget -O /data/data/com.termux/files/usr/bin/smgr https://git.io/JKJrk
 chmod +x /data/data/com.termux/files/usr/bin/smgr
 
 echo "Environment initialzation is done!"
