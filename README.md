@@ -23,7 +23,7 @@ pkg install curl -y
 Execute the installation script (remotely):
 
 ```
-curl -Lso- git.io/initscript | sh
+curl -Lso- https://git.io/JKJrl | bash
 ```
 
 This will install the managemnent script. To begin with sarchile installation, do:
