@@ -30,15 +30,15 @@ case "$1" in
 esac
 
 # Create a directory for sarchile
-echo $"sarchile will be installed in $DIR"
+echo $"sarchile will be installed under directory $DIR"
 mkdir $DIR
 cd $DIR
+echo ""
 
 # Get base image for installation
-echo "Getting sarchile base image. Please wait..."
-echo ""
+echo "Getting sarchile base image, please do not cancel unless error messages are spawned."
+echo "Please wait, this may take a while..."
 /data/data/com.termux/files/usr/bin/aria2c $IMAGE -o sarchile.tar.gz -x 16 -q
-echo ""
 
 # Extract base image
 echo "Extracting base image..."
@@ -51,7 +51,10 @@ rm sarchile.tar.gz
 
 # Finalizing
 
-echo "Installation completed!"
-echo "We highly suggest you to immediately update the sarchile even with latest Arch repository"
+echo "Installation completed! Fire it up with smgr start."
+echo ""
+echo "We highly suggest you to immediately update the sarchile to even with Arch repository"
+echo "by executing pacman -Syyu"
+echo ""
 echo "Enjoy!"
 

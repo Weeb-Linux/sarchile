@@ -1,5 +1,4 @@
-# IMPORTANT: The project is still under heavy development. Do not expect too much functionalities!
-
+# IMPORTANT: The project is still under heavy development. Do not ask for ETA for features!
 # sarchile
 
 **S**imple **Arch** Linux on mob**ile**
@@ -7,6 +6,15 @@
 ## Introduction
 
 This (project, maybe?) is a set of quick and simple scripts to help you run a small, versatile Arch Linux on your Android. And yea, we uses Termux with proot.
+
+## System requirements
+
+There is no actual hardware or software minimal requirement to install sarchile. If your phone can install and work with Termux then you are pretty fine to go.
+
+However, to ensure the best experience, your device should...
+
+- Have at least 2GB of storage to install sarchile, but for a more daily using we suggest 8GB of storage or higher.
+- sarchile itself uses nearly no memory at idle, but 4GB of device ram is recommended. Because your Android system (and other Android apps) could've take a plenty of memory already.
 
 # Instructions
 
