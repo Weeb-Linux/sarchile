@@ -24,7 +24,7 @@ case "$1" in
 		fi
 		;;
 	*)
-	    echo $"Usage: $0 {install|uninstall|start}"
+	    echo "Usage: smg {install|uninstall|start}"
 	    exit 2
 	    ;;
 esac
@@ -37,12 +37,12 @@ cd $DIR
 # Get base image for installation
 echo "Getting sarchile base image. Please wait..."
 echo ""
-/data/data/com.termux/files/usr/bin/aria2c $IMAGE -o sarchile.tar.gz -x 16
+/data/data/com.termux/files/usr/bin/aria2c $IMAGE -o sarchile.tar.gz -x 16 -q
 echo ""
 
 # Extract base image
 echo "Extracting base image..."
-/data/data/com.termux/files/usr/bin/tar xf ~/sarchile.tar.gz
+/data/data/com.termux/files/usr/bin/tar xf sarchile.tar.gz
 
 # Finish the installation
 chmod +w .
