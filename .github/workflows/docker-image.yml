@@ -25,7 +25,7 @@ jobs:
       run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:latest
 
     - name: Build the image
-      run: sudo docker build . --file Dockerfile --output type=tar,dest=base.tar.gz
+      run: sudo docker build . --file Dockerfile --output type=tar,dest=base.tar
     
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@v1.2.1
