@@ -1,29 +1,42 @@
-on: [push]
+name: Docker Image CI
+
+on:
+  push:
+    branches: [main]
 
 jobs:
-  aarch64_job:
+  build:
     runs-on: ubuntu-latest
-    name: Build sarchile base system image
+    env:
+      DOCKER_TARGET_PLATFORM: linux/arm64
     steps:
-      - uses: actions/checkout@v2
-      - uses: uraimo/run-on-arch-action@v2.1.1
-        name: Running build commands
-        with:
-          arch: aarch64
-          distro: ubuntu20.04
-          githubToken: ${{ github.token }}
-          run: |
-            sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:latest
-            sudo docker build . --file Dockerfile --tag base:$(date +%s)
-            sudo docker save sarchile | gzip > sarchile.tar.gz
-            
-      - name: Automatic Releases
-        uses: marvinpinto/action-automatic-releases@v1.2.1
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: "base"
-          draft: true
-          prerelease: true
-          title: "Base system image"
-          files: |
-            sarchile.tar.gz
+    - name: Checkout latest code
+      uses: actions/checkout@v2
+    
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1.2.0
+      with:
+        platforms: linux/arm64
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1.6.0
+
+    - name: Call docker to fetch latest archlinuxarm image
+      run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:latest
+
+    - name: Build the image
+      run: sudo docker build . --file Dockerfile.aarch64 --tag base:$(date +%s)
+    
+    - name: Save and export built image
+      run: sudo docker save sarchile | gzip > sarchile.tar.gz
+    
+    - name: Automatic Releases
+      uses: marvinpinto/action-automatic-releases@v1.2.1
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        automatic_release_tag: "base"
+        draft: true
+        prerelease: true
+        title: "Base system image"
+        files: |
+          sarchile.tar.gz
