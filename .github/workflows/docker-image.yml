@@ -27,33 +27,16 @@ jobs:
     - name: Build the image
       run: sudo docker build . --file Dockerfile -t sarchile:latest
     
-    # We can't use 'docker save' command to export the image because
-    # it will compare the final sarchile image's SHA256 checksum
-    # with the original archlinuxarm image's one.
-    #
-    # Thus, we will use 'docker export' command as workaround by deploy
-    # sarchile image into a container then export that container's
-    # rootfs into a tarball
+    - name: Save image into a tarball file
+      run: sudo docker save sarchile:latest | gzip -9 > base.tar.gz
 
-    - name: Deploy image into a container
-      run: sudo docker run -t sarchile bash /usr/bin/bash
-
-    - name: Set a variable to container's ID
-      run: CONTAINER_ID=$(sudo docker container ls -a | grep -i sarchile | awk '{print $1}')
-    
-    - name: Export container rootfs into image
-      run: sudo docker export $CONTAINER_ID > base.tar
-
-    - name: Gzip the tarball image
-      run: gzip -9 base.tar
-
-    - name: Automatic Releases
-      uses: marvinpinto/action-automatic-releases@v1.2.1
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        automatic_release_tag: "base"
-        draft: true
-        prerelease: true
-        title: "Base system image"
-        files: |
-          base.tar.gz
+    #- name: Automatic Releases
+    #  uses: marvinpinto/action-automatic-releases@v1.2.1
+    #  with:
+    #    repo_token: ${{ secrets.GITHUB_TOKEN }}
+    #    automatic_release_tag: "base"
+    #    draft: true
+    #    prerelease: true
+    #    title: "Base system image"
+    #    files: |
+    #      base.tar.gz
