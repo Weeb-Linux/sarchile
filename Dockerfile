@@ -20,7 +20,8 @@ RUN pacman -Syyu --noconfirm
 
 # Nuke locale directory
 RUN rm -rf /usr/share/locale
-
+# Readd locale.alias so we can generate locale again
+ADD conf/locale.alias /usr/share/locale/locale.alias
 # Update custom locale.gen file, default to en_US.UTF-8
 ADD conf/locale.gen /etc/locale.gen
 # and generate the locale
