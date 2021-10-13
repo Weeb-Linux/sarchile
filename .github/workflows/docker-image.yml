@@ -28,7 +28,7 @@ jobs:
       run: sudo docker build . --file Dockerfile --tag base:latest
     
     - name: DEBUG Print available images
-      run: sudo docker ps
+      run: sudo docker image ls
 
     #- name: Save and export built image
     #  run: sudo docker save -o ./base.tar.gz base:latest
