@@ -13,7 +13,7 @@ RUN pacman-key --init
 RUN pacman-key --populate archlinuxarm
 
 # Remove unnecessary packages
-RUN pacman -Rns linux-firmware linux-aarch64 python2 --noconfirm
+RUN pacman -Rns linux-firmware linux-aarch64 --noconfirm
 
 # Update the base image to even with latest official ArchLinuxArm repositories
 RUN pacman -Syyu --noconfirm
