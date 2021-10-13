@@ -28,16 +28,19 @@ jobs:
     - name: Build the image
       run: sudo docker image build . --file Dockerfile --output type=tar,dest=base.tar
     
-    - name: Gzip the tarball image
-      run: gzip -9 base.tar
+    - name: DEBUG List available files in directory
+      run: ls -la
 
-    - name: Automatic Releases
-      uses: marvinpinto/action-automatic-releases@v1.2.1
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        automatic_release_tag: "base"
-        draft: true
-        prerelease: true
-        title: "Base system image"
-        files: |
-          base.tar.gz
+    #- name: Gzip the tarball image
+    #  run: gzip -9 base.tar
+
+    #- name: Automatic Releases
+    #  uses: marvinpinto/action-automatic-releases@v1.2.1
+    #  with:
+    #    repo_token: ${{ secrets.GITHUB_TOKEN }}
+    #    automatic_release_tag: "base"
+    #    draft: true
+    #    prerelease: true
+    #    title: "Base system image"
+    #    files: |
+    #      base.tar.gz

@@ -1,4 +1,4 @@
-# IMPORTANT: The project is still under heavy development. Do not ask for ETA for features!
+# IMPORTANT: The project is still under heavy development. We force push a lot!
 # sarchile
 
 **S**imple **Arch** Linux on mob**ile**
