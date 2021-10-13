@@ -25,10 +25,10 @@ jobs:
       run: wget -O archarm http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz
     
     - name: Build the image
-      run: docker build . --file Dockerfile --tag base:$(date +%s)
+      run: sudo docker build . --file Dockerfile --tag base:$(date +%s)
     
     - name: Save and export built image
-      run: docker save sarchile | gzip > sarchile.tar.gz
+      run: sudo docker save sarchile | gzip > sarchile.tar.gz
     
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@v1.2.1
