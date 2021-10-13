@@ -6,7 +6,6 @@ WORKDIR /
 ADD conf/pacman.conf /etc/pacman.conf
 
 # Fix resolv.conf file
-RUN rm /etc/resolv.conf
 ADD conf/resolv.conf /etc/resolv.conf
 
 # Initialize pacman keyring
