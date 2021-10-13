@@ -28,7 +28,7 @@ jobs:
       run: sudo docker build . --file Dockerfile --tag base:$(date +%s)
     
     - name: Save and export built image
-      run: sudo docker save sarchile | gzip > sarchile.tar.gz
+      run: sudo docker save -o ./base.tar.gz base:$(date +%s)
     
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@v1.2.1
