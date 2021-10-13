@@ -16,14 +16,14 @@ jobs:
             sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:latest
             sudo docker build . --file Dockerfile --tag base:$(date +%s)
             sudo docker save sarchile | gzip > sarchile.tar.gz
-
-    - name: Automatic Releases
-      uses: marvinpinto/action-automatic-releases@v1.2.1
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        automatic_release_tag: "base"
-        draft: true
-        prerelease: true
-        title: "Base system image"
-        files: |
-          sarchile.tar.gz
+            
+      - name: Automatic Releases
+        uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: "base"
+          draft: true
+          prerelease: true
+          title: "Base system image"
+          files: |
+            sarchile.tar.gz
