@@ -18,12 +18,16 @@ RUN pacman -Rns linux-firmware linux-aarch64 --noconfirm
 # Update the base image to even with latest official ArchLinuxArm repositories
 RUN pacman -Syyu --noconfirm
 
-# Generate locale to American English
-ENV LANG=en_US.UTF-8
+# Nuke locale directory
+RUN rm -rf /usr/share/locale
+
+# Update custom locale.gen file, default to en_US.UTF-8
+ADD conf/locale.gen /etc/locale.gen
+# and generate the locale
 RUN locale-gen
 
-# Remove unnecessary locales
-RUN cd /usr/share/locale && rm -r !(en_US/|locale.alias) && cd /
+# Set language to American English
+ADD conf/locale.conf /etc/locale.conf
 
 # Fix directories permission to match with packages
 RUN chmod -R 755 /etc
