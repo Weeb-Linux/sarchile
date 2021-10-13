@@ -1,0 +1,42 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Refresh apt package repositories
+      run: apt update
+    
+    - name: Install wget to fetch latest archlinuxarm aarch64 image
+      run: apt install wget -y
+      
+    - name: Fetch latest archlinuxarm aarch64 image 
+      run: wget -O archarm http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz
+    
+    - name: Build the image
+      run: docker build . --file Dockerfile --tag base:$(date +%s)
+    
+    - name: Save and export built image
+      run: docker save sarchile | gzip > sarchile.tar.gz
+    
+    - name: Automatic Releases
+      uses: marvinpinto/action-automatic-releases@v1.2.1
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        automatic_release_tag: "base"
+        draft: true
+        prerelease: true
+        title: "Base system image"
+        files: |
+          sarchile.tar.gz
