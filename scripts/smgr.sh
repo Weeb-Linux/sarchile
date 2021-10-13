@@ -1,14 +1,12 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-# Input validator and printing basic help
-
 case "$1" in
 	install)
 		IMAGE=https://github.com/Weeb-Linux/sarchile/releases/download/base/base.tar.gz
 		DIR=~/.sarchile
 		
 		# Create a directory for sarchile
-		echo $"sarchile will be installed under directory $DIR"
+		echo "sarchile rootfs will be installed under directory .sarchile"
 		mkdir $DIR
 		cd $DIR
 		echo ""
@@ -35,7 +33,6 @@ case "$1" in
 		echo "by executing pacman -Syyu"
 		echo ""
 		echo "Enjoy!"
-=
 		;;
 	uninstall)
 		chmod -R 777 ~/.sarchile
@@ -54,7 +51,7 @@ case "$1" in
 		fi
 		;;
 	*)
-	    echo "Usage: smg {install|uninstall|start}"
+	    echo "Usage: smgr {install|uninstall|start}"
 	    exit 2
 	    ;;
 esac
