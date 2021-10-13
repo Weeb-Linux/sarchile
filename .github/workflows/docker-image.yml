@@ -25,10 +25,10 @@ jobs:
       run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:latest
 
     - name: Build the image
-      run: sudo docker build . --file Dockerfile --tag base:$(date +%s)
+      run: sudo docker build . --file Dockerfile --tag base:latest
     
     - name: Save and export built image
-      run: sudo docker save -o ./base.tar.gz base:$(date +%s)
+      run: sudo docker save -o ./base.tar.gz base:latest
     
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@v1.2.1
@@ -39,4 +39,4 @@ jobs:
         prerelease: true
         title: "Base system image"
         files: |
-          sarchile.tar.gz
+          base.tar.gz
