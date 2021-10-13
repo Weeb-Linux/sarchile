@@ -14,7 +14,7 @@ case "$1" in
 	    exit 0
 	    ;;
 	start)
-		if [ -d ".sarchile" ]
+		if [ -d "~/.sarchile" ]
 			then
 				unset LD_PRELOAD && proot --link2symlink -0 -r ~/.sarchile -b /dev/ -b /sys/ -b /proc/ -b /storage/ -b $HOME -w $HOME /bin/env -i HOME=/root TERM="$TERM" LANG=$LANG PATH=/bin:/usr/bin:/sbin:/usr/sbin /bin/bash --login
 			else
