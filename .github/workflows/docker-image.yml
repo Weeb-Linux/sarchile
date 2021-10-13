@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_TARGET_PLATFORM: linux/arm64
-      DOCKER_BUILDKIT: 1
     steps:
     - name: Checkout latest code
       uses: actions/checkout@v2
@@ -26,10 +25,10 @@ jobs:
       run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:latest
 
     - name: Build the image
-      run: sudo docker image build . --file Dockerfile --output type=tar,dest=base.tar
+      run: sudo docker build . --file Dockerfile -t sarchile:latest
     
-    - name: DEBUG List available files in directory
-      run: ls -la
+    - name: DEBUG List available images
+      run: docker images
 
     #- name: Gzip the tarball image
     #  run: gzip -9 base.tar
