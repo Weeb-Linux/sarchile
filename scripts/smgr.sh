@@ -6,6 +6,36 @@ case "$1" in
 	install)
 		IMAGE=https://github.com/Weeb-Linux/sarchile/releases/download/base/base.tar.gz
 		DIR=~/.sarchile
+		
+		# Create a directory for sarchile
+		echo $"sarchile will be installed under directory $DIR"
+		mkdir $DIR
+		cd $DIR
+		echo ""
+
+		# Get base image for installation
+		echo "Getting sarchile base image, please do not cancel unless error messages are spawned."
+		echo "Please wait, this may take a while..."
+		/data/data/com.termux/files/usr/bin/aria2c $IMAGE -o sarchile.tar.gz -x 16 -q
+
+		# Extract base image
+		echo "Extracting base image..."
+		/data/data/com.termux/files/usr/bin/tar xf sarchile.tar.gz
+
+		# Finish the installation
+		chmod +w .
+		echo "Reclaiming disk space..."
+		rm sarchile.tar.gz
+
+		# Finalizing
+
+		echo "Installation completed! Fire it up with smgr start."
+		echo ""
+		echo "We highly suggest you to immediately update the sarchile to even with Arch repository"
+		echo "by executing pacman -Syyu"
+		echo ""
+		echo "Enjoy!"
+=
 		;;
 	uninstall)
 		chmod -R 777 ~/.sarchile
@@ -29,32 +59,4 @@ case "$1" in
 	    ;;
 esac
 
-# Create a directory for sarchile
-echo $"sarchile will be installed under directory $DIR"
-mkdir $DIR
-cd $DIR
-echo ""
-
-# Get base image for installation
-echo "Getting sarchile base image, please do not cancel unless error messages are spawned."
-echo "Please wait, this may take a while..."
-/data/data/com.termux/files/usr/bin/aria2c $IMAGE -o sarchile.tar.gz -x 16 -q
-
-# Extract base image
-echo "Extracting base image..."
-/data/data/com.termux/files/usr/bin/tar xf sarchile.tar.gz
-
-# Finish the installation
-chmod +w .
-echo "Reclaiming disk space..."
-rm sarchile.tar.gz
-
-# Finalizing
-
-echo "Installation completed! Fire it up with smgr start."
-echo ""
-echo "We highly suggest you to immediately update the sarchile to even with Arch repository"
-echo "by executing pacman -Syyu"
-echo ""
-echo "Enjoy!"
 
