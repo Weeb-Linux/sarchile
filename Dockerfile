@@ -2,7 +2,7 @@ FROM archarm:latest
 
 WORKDIR /archlinux
 
-RUN mkdir -p /archlinux/rootfs
+RUN mkdir /archlinux/rootfs
 
 COPY pacstrap-docker /archlinux/
 
