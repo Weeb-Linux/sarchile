@@ -40,4 +40,4 @@ jobs:
         prerelease: true
         title: "Base system image"
         files: |
-          base.tar
+          base.tar.gz
