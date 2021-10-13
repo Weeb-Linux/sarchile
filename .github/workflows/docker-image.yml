@@ -16,10 +16,10 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Refresh apt package repositories
-      run: apt update
+      run: sudo apt update
     
     - name: Install wget to fetch latest archlinuxarm aarch64 image
-      run: apt install wget -y
+      run: sudo apt install wget -y
       
     - name: Fetch latest archlinuxarm aarch64 image 
       run: wget -O archarm http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz
