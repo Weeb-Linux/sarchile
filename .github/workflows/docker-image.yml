@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_TARGET_PLATFORM: linux/arm64
+      DOCKER_BUILDKIT: 1
     steps:
     - name: Checkout latest code
       uses: actions/checkout@v2
@@ -27,6 +28,9 @@ jobs:
     - name: Build the image
       run: sudo docker build . --file Dockerfile --output type=tar,dest=base.tar
     
+    - name: Gzip the tarball image
+      run: gzip -9 base.tar base.tar.gz
+
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@v1.2.1
       with:
