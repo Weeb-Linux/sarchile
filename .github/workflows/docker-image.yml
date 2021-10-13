@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Call docker to fetch latest archlinuxarm image
-      run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:lastest
+      run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:latest
 
     - name: Build the image
       run: sudo docker build . --file Dockerfile --tag base:$(date +%s)
