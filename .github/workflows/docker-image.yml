@@ -26,10 +26,10 @@ jobs:
       run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:latest
 
     - name: Build the image
-      run: sudo docker build . --file Dockerfile --output type=tar,dest=base.tar
+      run: sudo docker image build . --file Dockerfile --output type=tar,dest=base.tar
     
     - name: Gzip the tarball image
-      run: gzip -9 base.tar base.tar.gz
+      run: gzip -9 base.tar
 
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@v1.2.1
