@@ -9,14 +9,14 @@ ADD conf/pacman.conf /etc/pacman.conf
 ADD conf/resolv.conf /etc/resolv.conf
 
 # Initialize pacman keyring
-RUN pacman-key --init
-RUN pacman-key --populate archlinuxarm
+#RUN pacman-key --init
+#RUN pacman-key --populate archlinuxarm
 
 # Remove unnecessary packages
-RUN pacman -Rns linux-firmware linux-aarch64 --noconfirm
+#RUN pacman -Rns linux-firmware linux-aarch64 --noconfirm
 
 # Update the base image to even with latest official ArchLinuxArm repositories
-RUN pacman -Syyu --noconfirm
+#RUN pacman -Syyu --noconfirm
 
 # Nuke locale directory
 RUN rm -rf /usr/share/locale
@@ -31,9 +31,9 @@ RUN locale-gen
 ADD conf/locale.conf /etc/locale.conf
 
 # Fix directories permission to match with packages
-RUN chmod -R 755 /etc
-RUN chmod -R 755 /usr
-RUN chmod -R 755 /var
+#RUN chmod -R 755 /etc
+#RUN chmod -R 755 /usr
+#RUN chmod -R 755 /var
 
 
 CMD ["/usr/bin/bash"]

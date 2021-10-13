@@ -36,7 +36,7 @@ jobs:
     # rootfs into a tarball
 
     - name: Deploy image into a container
-      run: sudo docker run -t sarchile bash ls
+      run: sudo docker run -t sarchile bash /usr/bin/bash
 
     - name: Set a variable to container's ID
       run: CONTAINER_ID=$(sudo docker container ls -a | grep -i sarchile | awk '{print $1}')
