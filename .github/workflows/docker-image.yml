@@ -24,7 +24,7 @@ jobs:
     - name: Fetch latest archlinuxarm aarch64 image 
       run: wget -O archarm http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz
     
-    - name: [DEBUG] List directory
+    - name: DEBUG List directory
       run: ls -la
 
     - name: Build the image
