@@ -25,7 +25,7 @@ jobs:
       run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:latest
 
     - name: Build the image
-      run: sudo docker build . --file Dockerfile.aarch64 --tag base:$(date +%s)
+      run: sudo docker build . --file Dockerfile --tag base:$(date +%s)
     
     - name: Save and export built image
       run: sudo docker save sarchile | gzip > sarchile.tar.gz
