@@ -1,4 +1,4 @@
-FROM archarm
+FROM archarm:latest
 
 WORKDIR /archlinux
 

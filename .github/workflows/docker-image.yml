@@ -15,17 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Refresh apt package repositories
-      run: sudo apt update
-    
-    - name: Install wget to fetch latest archlinuxarm aarch64 image
-      run: sudo apt install wget -y
-      
-    - name: Fetch latest archlinuxarm aarch64 image 
-      run: wget -O archarm http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz
-    
-    - name: DEBUG List directory
-      run: ls -la
+    - name: Call docker to fetch latest archlinuxarm image
+      run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:lastest
 
     - name: Build the image
       run: sudo docker build . --file Dockerfile --tag base:$(date +%s)
