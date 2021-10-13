@@ -1,4 +1,5 @@
 # IMPORTANT: The project is still under heavy development. We force push a lot!
+Join our [Telegram channel](https://t.me/joinchat/ol_1uKptA1ZiNWU1) now to stay up to date with main developer.
 # sarchile
 
 **S**imple **Arch** Linux on mob**ile**

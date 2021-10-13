@@ -1,9 +1,10 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
+DIR=~/.sarchile
+
 case "$1" in
 	install)
 		IMAGE=https://github.com/Weeb-Linux/sarchile/releases/download/base/base.tar.gz
-		DIR=~/.sarchile
 		
 		# Create a directory for sarchile
 		echo "sarchile rootfs will be installed under directory .sarchile"
@@ -41,7 +42,7 @@ case "$1" in
 	    exit 0
 	    ;;
 	start)
-		if [ -d "~/.sarchile" ]
+		if [ -d $DIR ]
 		then
 			unset LD_PRELOAD && proot --link2symlink -0 -r ~/.sarchile -b /dev/ -b /sys/ -b /proc/ -b /storage/ -b $HOME -w $HOME /bin/env -i HOME=/root TERM="$TERM" LANG=$LANG PATH=/bin:/usr/bin:/sbin:/usr/sbin /bin/bash --login
 		else
