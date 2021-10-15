@@ -13,21 +13,32 @@ case "$1" in
 		echo ""
 
 		# Get base image for installation
-		echo "Getting sarchile base image, please do not cancel unless error messages are spawned."
+		echo "Getting sarchile base image, please do not kill the installation unless error messages are spawned."
 		echo "Please wait, this may take a while..."
 		/data/data/com.termux/files/usr/bin/aria2c $IMAGE -o sarchile.tar.gz -x 16 -q
 
 		# Extract base image
 		echo "Extracting base image..."
-		/data/data/com.termux/files/usr/bin/tar xf sarchile.tar.gz
+		/data/data/com.termux/files/usr/bin/tar xf sarchile.tar.gz > /dev/null 2>&1 # hide all hard link error
+																					# because we are not using root
+																					# this is expected and totally fine
 
 		# Finish the installation
 		chmod +w .
 		echo "Reclaiming disk space..."
 		rm sarchile.tar.gz
 
-		# Finalizing
+		# Fix directories permission
 
+		chmod -R 755 $DIR/etc
+		chmod -R 755 $DIR/usr
+		chmod -R 755 $DIR/var
+
+		# Fix resolv.conf duplicate
+
+		mv $DIR/etc/resolvconf.conf $DIR/etc/resolv.conf
+
+		# Finalizing
 		echo "Installation completed! Fire it up with smgr start."
 		echo ""
 		echo "We highly suggest you to immediately update the sarchile to even with Arch repository"
