@@ -6,7 +6,7 @@ Join our [Telegram channel](https://t.me/joinchat/ol_1uKptA1ZiNWU1) now to stay 
 
 ## Introduction
 
-This (project, maybe?) is a set of quick and simple scripts to help you run a small, versatile Arch Linux on your Android. And yea, we uses Termux with proot.
+This (project, maybe?) is a set of quick and simple scripts to help you run Arch Linux on your Android. And yea, we use Termux with proot.
 
 ## Information
 
