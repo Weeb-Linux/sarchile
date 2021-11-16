@@ -14,13 +14,13 @@ RUN pacman-key --init
 RUN pacman-key --populate archlinuxarm
 
 # Remove unnecessary packages
-RUN pacman -Rns linux-firmware linux-aarch64 --noconfirm
+RUN pacman -Rns --noconfirm linux-firmware linux-aarch64 openssh
 
 # Update the base image to even with latest official ArchLinuxArm repositories
 RUN pacman -Syyu --noconfirm
 
 # Install necessary packages
-RUN pacman -S --needed neofetch htop vi vim wget curl ncurses
+RUN pacman -S --needed --noconfirm neofetch htop vim wget
 
 # Remove /boot directory since the environment
 # will never be booted
