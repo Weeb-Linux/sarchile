@@ -2,10 +2,19 @@
 
 DIR=~/.sarchile
 
+ARCH=$(uname -m)
+
 case "$1" in
 	install)
-		IMAGE=https://github.com/Weeb-Linux/sarchile/releases/download/base/base.tar.gz
-		
+		if [$(uname -m) = "aarch64"]
+		then
+			IMAGE_URL=https://git.io/J13Xi
+		else
+			echo "Your device CPU architecture is currently unsupported by sarchile."
+			exit 0
+		fi
+		echo ""
+
 		# Create a directory for sarchile
 		echo "sarchile rootfs will be installed under directory .sarchile"
 		mkdir $DIR
@@ -15,34 +24,33 @@ case "$1" in
 		# Get base image for installation
 		echo "Getting sarchile base image, please do not kill the installation unless error messages are spawned."
 		echo "Please wait, this may take a while..."
-		/data/data/com.termux/files/usr/bin/aria2c $IMAGE -o sarchile.tar.gz -x 16 -q
+		/data/data/com.termux/files/usr/bin/aria2c $IMAGE_URL -o sarchile.tar.gz -x 16 -q
 
 		# Extract base image
 		echo "Extracting base image..."
-		/data/data/com.termux/files/usr/bin/tar xf sarchile.tar.gz > /dev/null 2>&1 # hide all hard link error
-																					# because we are not using root
-																					# this is expected and totally fine
+		/data/data/com.termux/files/usr/bin/tar xf sarchile.tar.gz > /dev/null 2>&1 
 
-		# Finish the installation
-		chmod +w .
+		# Finalizing installation
+
+		# Remove image tarball
 		echo "Reclaiming disk space..."
 		rm sarchile.tar.gz
 
 		# Fix directories permission
-
 		chmod -R 755 $DIR/etc
 		chmod -R 755 $DIR/usr
 		chmod -R 755 $DIR/var
+		chmod -R 755 $DIR/opt
+		chmod -R 755 $DIR/mnt
+		chmod -R 750 $DIR/root
+		chmod -R 755 $DIR/run
 
-		# Fix resolv.conf duplicate
-
+		# Replace resolv.conf file
 		mv $DIR/etc/resolvconf.conf $DIR/etc/resolv.conf
+		rm $DIR/etc/resolvconf.conf
 
-		# Finalizing
+		# Print successful installation message 
 		echo "Installation completed! Fire it up with smgr start."
-		echo ""
-		echo "We highly suggest you to immediately update the sarchile to even with Arch repository"
-		echo "by executing pacman -Syyu"
 		echo ""
 		echo "Enjoy!"
 		;;

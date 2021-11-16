@@ -1,0 +1,58 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_TARGET_PLATFORM: linux/arm64
+    steps:
+    - name: Fetch latest code
+      uses: actions/checkout@v2
+    
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1.2.0
+      with:
+        platforms: linux/arm64
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1.6.0
+
+    - name: Pull latest ArchLinuxARM aarch64 image and import as Docker image
+      run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm:latest
+
+    - name: Build the custom image for sarchile
+      run: sudo docker build . --file Dockerfile -t sarchile:latest
+    
+    # We can't use 'docker save' command to export the image because
+    # it will compare the final sarchile image's SHA256 checksum
+    # with non-existed layer.tar image.
+    #
+    # Thus, we will use 'docker export' command as workaround by deploy
+    # sarchile image into a container then export that container's
+    # rootfs into a tarball
+
+    - name: Deploy image to a container
+      run: sudo docker run -itd --name sarchile sarchile:latest /bin/bash
+
+    - name: Export container rootfs into tarball image
+      run: sudo docker export sarchile > base.tar
+
+    - name: Gzip the tarball image with highest compression level
+      run: gzip -9 base.tar
+
+    - name: Automatically push image to release
+      uses: marvinpinto/action-automatic-releases@v1.2.1
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        automatic_release_tag: "base"
+        draft: false
+        prerelease: true
+        title: "Base system image"
+        files: |
+          scripts/initscript.sh
+          scripts/smgr.sh
+          base.tar.gz
