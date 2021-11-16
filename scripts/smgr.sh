@@ -6,7 +6,7 @@ ARCH=$(uname -m)
 
 case "$1" in
 	install)
-		if [["$(uname -m)" == "aarch64"]]
+		if [[ "$(uname -m)" == "aarch64" ]]
 		then
 			IMAGE_URL=https://git.io/J13Xi
 		else
