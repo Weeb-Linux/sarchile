@@ -2,6 +2,9 @@ FROM archarm:latest
 
 WORKDIR /
 
+# Update pacman.conf file
+ADD conf/pacman.conf /etc/pacman.conf
+
 # Add dummy resolv.conf file, manager script will
 # replace it with acutal resolv.conf file later.
 # This is happened because Docker can't hard replace

@@ -47,7 +47,6 @@ case "$1" in
 
 		# Replace resolv.conf file
 		mv $DIR/etc/resolvconf.conf $DIR/etc/resolv.conf
-		rm $DIR/etc/resolvconf.conf
 
 		# Print successful installation message 
 		echo "Installation completed! Fire it up with smgr start."

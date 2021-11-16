@@ -1,5 +1,7 @@
-# IMPORTANT: This project is still under heavy development. We force push a lot!
-Join our [Telegram channel](https://t.me/joinchat/ol_1uKptA1ZiNWU1) now to stay up to date with main developer.
+# Notice: We unpaused the development, but it will be dramatically slow.
+
+We actually are students and our spare time is going to a dead end. Thus, we expect to work on sarchile every Sunday. But you still can use sarchile since it's very stable to use.
+
 # sarchile
 
 **S**imple **Arch** Linux on mob**ile**
@@ -11,6 +13,12 @@ This (project, maybe?) is a set of quick and simple scripts to help you run Arch
 ## Information
 
 We have moved all information of sarchile project to its [wiki](https://github.com/Weeb-Linux/sarchile/wiki).
+
+Quick navigation: 
+- [System requirements](https://github.com/Weeb-Linux/sarchile/wiki/System-requirements)
+- [Installation](https://github.com/Weeb-Linux/sarchile/wiki/Installation)
+- [Better understanding and cautions](https://github.com/Weeb-Linux/sarchile/wiki/Better-understanding-and-cautions)
+- [Credits](https://github.com/Weeb-Linux/sarchile/wiki/Credits)
 
 ## Bug and feature tracker
 
@@ -27,3 +35,4 @@ We do know this is a bad practice for a software repository but we don't have mu
 # Donation
 - [PayPal](https://paypal.me/iamwello).
 - For donation from Vietnam. Please contact me via [Telegram](https://t.me/wello6143).
+- We cannot handle donation from restricted regions like China, send it on your own effort.
