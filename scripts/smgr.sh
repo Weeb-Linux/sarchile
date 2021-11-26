@@ -3,22 +3,25 @@
 DIR=~/.sarchile
 
 ARCH=$(uname -m)
+IMAGE_ARM64=
+IMAGE_ARM=
+IMAGE_x86_64=
 
 case "$1" in
 	install)
-		case "$(uname -m)" in
+		case $ARCH in
 			armv7l | armv8l)
 				echo "Setting up sarchile for armv7l & armv8l (arm)"
-				IMAGE_URL=
+				IMAGE_URL=$IMAGE_ARM
 			;;
 			aarch64)
 				if [[ "$2" == "--force32" ]]
 				then
 				echo "You forced 32bit image, setting up sarchile for arm, you'll be using proot with linux32"
-				IMAGE_URL=
+				IMAGE_URL=$IMAGE_ARM
 				else
 				echo "Setting up sarchile for aarch64 (arm64)"
-				IMAGE_URL=
+				IMAGE_URL=$IMAGE_ARM64
 				fi
 			;;
 			x86)
