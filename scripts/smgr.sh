@@ -6,13 +6,35 @@ ARCH=$(uname -m)
 
 case "$1" in
 	install)
-		if [[ "$(uname -m)" == "aarch64" ]]
-		then
-			IMAGE_URL=https://git.io/J13Xi
-		else
-			echo "Your device CPU architecture is currently unsupported by sarchile."
-			exit 0
-		fi
+		case "$(uname -m)" in
+			armv7l | armv8l)
+				echo "Setting up sarchile for armv7l & armv8l (arm)"
+				IMAGE_URL=
+			;;
+			aarch64)
+				if [[ "$2" == "--force32" ]]
+				then
+				echo "You forced 32bit image, setting up sarchile for arm, you'll be using proot with linux32"
+				IMAGE_URL=
+				else
+				echo "Setting up sarchile for aarch64 (arm64)"
+				IMAGE_URL=
+				fi
+			;;
+			x86)
+				echo "sorry we don't support x86"
+				exit 0
+			;;
+			x86_64)
+				if [[ "$2" == "--force32" ]]
+				then
+				echo "sorry we don't support x86, --force32 won't work"
+				else
+				echo "Coming soon"
+				exit 0
+				fi
+			;;
+		esac
 		echo ""
 
 		# Create a directory for sarchile
@@ -62,7 +84,11 @@ case "$1" in
 	start)
 		if [ -d $DIR ]
 		then
+			if [[ "$2" == "--force32" ]]
+			unset LD_PRELOAD && linux32 proot --link2symlink -0 -r ~/.sarchile -b /dev/ -b /sys/ -b /proc/ -b /storage/ -b $HOME -w $HOME /bin/env -i HOME=/root TERM="$TERM" LANG=$LANG PATH=/bin:/usr/bin:/sbin:/usr/sbin /bin/bash --login
+			else
 			unset LD_PRELOAD && proot --link2symlink -0 -r ~/.sarchile -b /dev/ -b /sys/ -b /proc/ -b /storage/ -b $HOME -w $HOME /bin/env -i HOME=/root TERM="$TERM" LANG=$LANG PATH=/bin:/usr/bin:/sbin:/usr/sbin /bin/bash --login
+			fi
 		else
 			echo "error: sarchile is not installed, cannot start."
 			echo "Maybe smgr install instead?"
