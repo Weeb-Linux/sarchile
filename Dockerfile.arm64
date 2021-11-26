@@ -1,9 +1,9 @@
-FROM archarm:latest
+FROM archarm64:latest
 
 WORKDIR /
 
 # Update pacman.conf file
-ADD conf/pacman.conf /etc/pacman.conf
+ADD conf/pacman_arm64.conf /etc/pacman.conf
 
 # Add dummy resolv.conf file, manager script will
 # replace it with acutal resolv.conf file later.
