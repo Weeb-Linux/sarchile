@@ -99,7 +99,7 @@ case "$1" in
 		fi
 		;;
 	*)
-	    echo "Usage: smgr {install|uninstall|start}"
+	    echo "Usage: smgr {install|uninstall|start} {--force32}"
 	    exit 2
 	    ;;
 esac
