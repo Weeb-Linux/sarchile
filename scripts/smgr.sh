@@ -30,7 +30,7 @@ case "$1" in
 				armv7l | armv8l)
 					echo "Setting up sarchile 32bit (aarch32)"
 					IMAGE_URL=$IMAGE_ARM
-					DIR="~/.sarchile32"
+					DIR=".sarchile32"
 				;;
 				aarch64)
 					if [[ "$2" == "--force32" ]]
@@ -45,19 +45,19 @@ case "$1" in
         					[Yy]* )
 								echo "Solid copy, installing 32bit version of sarchile (armv7*/armv8l)"
 								IMAGE_URL=$IMAGE_ARM
-								DIR="~/.sarchile32"
+								DIR=".sarchile32"
 							;;
         					[Nn]* )
 								echo "OK, reverting back to sarchile aarch64 installation"
-								IMAGE_URL=$IMAGE_ARRCH64
-								DIR="~/.sarchile"
+								IMAGE_URL=$IMAGE_AARCH64
+								DIR=".sarchile"
 							;;
         					* ) echo "Please answer by typing y (for yes) or n (for no).";;
     						esac
 					else
 						echo "Setting up sarchile for aarch64 (aarch64)"
-						IMAGE_URL=$IMAGE_ARCH64
-						DIR="~/.sarchile"
+						IMAGE_URL=$IMAGE_AARCH64
+						DIR=".sarchile"
 					fi
 				;;
 				x86)
@@ -81,8 +81,8 @@ case "$1" in
 
 		# Create a directory for sarchile
 		echo "sarchile rootfs will be installed under directory $DIR"
-		mkdir $DIR
-		cd $DIR
+		mkdir ~/$DIR
+		cd ~/$DIR
 		echo ""
 
 		# Get base image for installation
@@ -100,7 +100,7 @@ case "$1" in
 		rm sarchile.tar.gz
 
 		# Replace resolv.conf file
-		mv $DIR/etc/resolvconf.conf $DIR/etc/resolv.conf
+		mv ~/$DIR/etc/resolvconf.conf ~/$DIR/etc/resolv.conf
 
 		# Print successful installation message 
 		echo "Installation completed! Fire it up with smgr start. Note that you're logged in as root user by default."
@@ -113,8 +113,8 @@ case "$1" in
 		exit 0
 		;;
 	uninstall)
-		chmod -R 777 ~/.sarchile
-		rm -rf ~/.sarchile
+		chmod -R 777 ~/$DIR
+		rm -rf ~/$DIR
 		echo "Successfully uninstalled sarchile!"
 		exit 0
 	    ;;
