@@ -3,8 +3,8 @@
 DIR=~/.sarchile
 
 ARCH=$(uname -m)
-IMAGE_ARM64=
-IMAGE_ARM=
+IMAGE_ARM64=https://git.io/JM3Zk
+IMAGE_ARM=https://git.io/JM3Zv
 IMAGE_x86_64=
 
 case "$1" in
