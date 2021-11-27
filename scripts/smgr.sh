@@ -30,7 +30,7 @@ case "$1" in
 				armv7l | armv8l)
 					echo "Setting up sarchile 32bit (aarch32)"
 					IMAGE_URL=$IMAGE_ARM
-					DIR="~./sarchile32"
+					DIR="~/.sarchile32"
 				;;
 				aarch64)
 					if [[ "$2" == "--force32" ]]
@@ -45,19 +45,19 @@ case "$1" in
         					[Yy]* )
 								echo "Solid copy, installing 32bit version of sarchile (armv7*/armv8l)"
 								IMAGE_URL=$IMAGE_ARM
-								DIR="~./sarchile32"
+								DIR="~/.sarchile32"
 							;;
         					[Nn]* )
 								echo "OK, reverting back to sarchile aarch64 installation"
 								IMAGE_URL=$IMAGE_ARRCH64
-								DIR="~./sarchile"
+								DIR="~/.sarchile"
 							;;
         					* ) echo "Please answer by typing y (for yes) or n (for no).";;
     						esac
 					else
 						echo "Setting up sarchile for aarch64 (aarch64)"
 						IMAGE_URL=$IMAGE_ARCH64
-						DIR="~./sarchile"
+						DIR="~/.sarchile"
 					fi
 				;;
 				x86)
@@ -76,6 +76,7 @@ case "$1" in
 					fi
 				;;
 			esac
+		fi
 		echo ""
 
 		# Create a directory for sarchile
