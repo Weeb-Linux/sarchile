@@ -25,6 +25,11 @@ RUN pacman -Syyu --noconfirm
 # Install necessary packages
 RUN pacman -S --needed --noconfirm neofetch htop vim wget
 
+# Push build info into /etc/motd file
+RUN echo "sarchile Preview" >> /etc/motd
+RUN echo "Build date: $(date)" >> /etc/motd
+RUN echo "Build variant: aarch32" >> /etc/motd
+
 # Remove /boot directory since the environment
 # will never be booted
 RUN rm -rf /boot
