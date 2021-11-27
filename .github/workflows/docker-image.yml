@@ -68,7 +68,7 @@ jobs:
         automatic_release_tag: "base"
         draft: false
         prerelease: false
-        title: "Build ${{ steps.date.outputs.date }}"
+        title: ${{ steps.date.outputs.date }}
         files: |
           scripts/initscript.sh
           scripts/smgr.sh
