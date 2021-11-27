@@ -67,8 +67,8 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         automatic_release_tag: "base"
         draft: false
-        prerelease: true
-        title: "Base system image"
+        prerelease: false
+        title: "Build ${{ steps.date.outputs.date }}"
         files: |
           scripts/initscript.sh
           scripts/smgr.sh
