@@ -21,10 +21,10 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1.6.0
 
-    - name: Pull latest ArchLinuxARM aarch64 image and import as Docker image
+    - name: [aarch64] Pull latest ArchLinuxARM aarch64 image and import as Docker image
       run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm64:latest
 
-    - name: Build the custom image for sarchile
+    - name: [aarch64] Build the custom image for sarchile
       run: sudo docker build . --file Dockerfile.arm64 -t sarchile_arm64:latest
     
     # We can't use 'docker save' command to export the image because
@@ -35,38 +35,30 @@ jobs:
     # sarchile image into a container then export that container's
     # rootfs into a tarball
 
-    - name: Deploy image to a container
+    - name: [aarch64] Deploy image to a container
       run: sudo docker run -itd --name sarchile_arm64 sarchile_arm64:latest /bin/bash
 
-    - name: Export container rootfs into tarball image
+    - name: [aarch64] Export container rootfs into tarball image
       run: sudo docker export sarchile_arm64 > base_arm64.tar
 
-    - name: Gzip the tarball image with highest compression level
+    - name: [aarch64] Gzip the tarball image with highest compression level
       run: gzip -9 base_arm64.tar
       
     # This time we build for armv7h
 
-    - name: Pull latest ArchLinuxARM armv7 image and import as Docker image
+    - name: [armv7h] Pull latest ArchLinuxARM armv7 image and import as Docker image
       run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-armv7-latest.tar.gz archarm:latest
 
-    - name: Build the custom image for sarchile
+    - name: [armv7h] Build the custom image for sarchile
       run: sudo docker build . --file Dockerfile.arm -t sarchile_arm:latest
     
-    # We can't use 'docker save' command to export the image because
-    # it will compare the final sarchile image's SHA256 checksum
-    # with non-existed layer.tar image.
-    #
-    # Thus, we will use 'docker export' command as workaround by deploy
-    # sarchile image into a container then export that container's
-    # rootfs into a tarball
-
-    - name: Deploy image to a container
+    - name: [armv7h] Deploy image to a container
       run: sudo docker run -itd --name sarchile_arm sarchile_arm:latest /bin/bash
 
-    - name: Export container rootfs into tarball image
+    - name: [armv7h] Export container rootfs into tarball image
       run: sudo docker export sarchile_arm > base_arm.tar
 
-    - name: Gzip the tarball image with highest compression level
+    - name: [armv7h] Gzip the tarball image with highest compression level
       run: gzip -9 base_arm.tar
 
     - name: Automatically push image to release
