@@ -8,7 +8,7 @@ case "$1" in
 	install)
 		if [[ "$(uname -m)" == "aarch64" ]]
 		then
-			IMAGE_URL=https://git.io/J13Xi
+			IMAGE_URL=https://git.io/JM3Zk
 		else
 			echo "Your device CPU architecture is currently unsupported by sarchile."
 			exit 0
