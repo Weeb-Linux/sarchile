@@ -13,7 +13,7 @@ pkg install wget proot tar aria2 -y
 
 echo "Installing sarchile manager tool..."
 
-wget -O /data/data/com.termux/files/usr/bin/smgr https://git.io/JKJrk
+wget -O /data/data/com.termux/files/usr/bin/smgr https://git.io/JMBpY
 chmod +x /data/data/com.termux/files/usr/bin/smgr
 
 echo "Environment initialization is done!"
