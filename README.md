@@ -20,6 +20,12 @@ Quick navigation:
 - [Better understanding and cautions](https://github.com/Weeb-Linux/sarchile/wiki/Better-understanding-and-cautions)
 - [Credits](https://github.com/Weeb-Linux/sarchile/wiki/Credits)
 
+## Announcements
+
+We won't use any social network (like Twitter) to post news about sarchile.
+
+We currently are using [Discussions](https://github.com/Weeb-Linux/sarchile/discussions) for this purpose.
+
 ## Bug and feature tracker
 
 Please see [sarchile development board](https://github.com/Weeb-Linux/sarchile/projects/1).
