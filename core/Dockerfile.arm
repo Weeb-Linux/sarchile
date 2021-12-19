@@ -3,14 +3,14 @@ FROM archarm:latest
 WORKDIR /
 
 # Update pacman.conf file
-ADD configs/pacman_arm.conf /etc/pacman.conf
+ADD ./core/configs/pacman_arm.conf /etc/pacman.conf
 
 # Add dummy resolv.conf file, manager script will
 # replace it with acutal resolv.conf file later.
 # This is happened because Docker can't hard replace
 # it when building image. Please see 
 # https://stackoverflow.com/q/41032744
-ADD configs/resolv.conf /etc/resolvconf.conf
+ADD ./core/configs/resolv.conf /etc/resolvconf.conf
 
 # Initialize pacman keyring
 RUN pacman-key --init
