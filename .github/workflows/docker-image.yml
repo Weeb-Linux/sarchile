@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Core image build script
 
 on:
   push:
@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ci_node_total: [4]
     env:
       DOCKER_TARGET_PLATFORM: linux/arm64
     steps:
@@ -25,16 +28,8 @@ jobs:
       run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz archarm64:latest
 
     - name: "[aarch64] Build the custom image for sarchile"
-      run: sudo docker build . --file Dockerfile.arm64 -t sarchile_arm64:latest
+      run: sudo docker build . --file ./core/Dockerfile.arm64 -t sarchile_arm64:latest
     
-    # We can't use 'docker save' command to export the image because
-    # it will compare the final sarchile image's SHA256 checksum
-    # with non-existed layer.tar image.
-    #
-    # Thus, we will use 'docker export' command as workaround by deploy
-    # sarchile image into a container then export that container's
-    # rootfs into a tarball
-
     - name: "[aarch64] Deploy image to a container"
       run: sudo docker run -itd --name sarchile_arm64 sarchile_arm64:latest /bin/bash
 
@@ -50,7 +45,7 @@ jobs:
       run: sudo docker import http://os.archlinuxarm.org/os/ArchLinuxARM-armv7-latest.tar.gz archarm:latest
 
     - name: "[armv7h] Build the custom image for sarchile"
-      run: sudo docker build . --file Dockerfile.arm -t sarchile_arm:latest
+      run: sudo docker build . --file ./core/Dockerfile.arm -t sarchile_arm:latest
     
     - name: "[armv7h] Deploy image to a container"
       run: sudo docker run -itd --name sarchile_arm sarchile_arm:latest /bin/bash
@@ -74,3 +69,12 @@ jobs:
           scripts/smgr.sh
           base_arm64.tar.gz
           base_arm.tar.gz
+
+
+    # We can't use 'docker save' command to export the image because
+    # it will compare the final sarchile image's SHA256 checksum
+    # with non-existed layer.tar image.
+    #
+    # Thus, we will use 'docker export' command as workaround by deploy
+    # sarchile image into a container then export that container's
+    # rootfs into a tarball
