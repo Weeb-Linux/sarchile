@@ -1,6 +1,6 @@
-# Notice: We unpaused the development, but it will be dramatically slow.
+# Note: The development is paused once again.
 
-We actually are students and our spare time is going to a dead end. Thus, we expect to work on sarchile every Sunday. But you still can use sarchile since it's very stable to use.
+Both of us have a lot of massive exams coming up. Thus, we once again pause all of our development.
 
 # sarchile
 
