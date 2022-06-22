@@ -1,8 +1,8 @@
-name: Docker Image CI
+name: Sarchile Core Imager Builder
 
 on:
   push:
-    branches: [main]
+    branches: [stable]
 
 jobs:
   build:
